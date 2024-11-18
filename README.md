@@ -77,10 +77,9 @@ In future iterations, we plan to:
 - Optimize the app for larger deployments and scalability.
 ## Contact
 For questions or collaborations, please contact:
-
-Team Name: visarapu.rajeswari.21cse
-Email: rajeswari6914@gmail.com
-GitHub: https://github.com/rajeswari6914/AI-predictive-maintenance-system.git
+- Team Name: visarapu.rajeswari.21cse
+- Email: rajeswari6914@gmail.com
+- GitHub: https://github.com/rajeswari6914/AI-predictive-maintenance-system.git
 
 
 
