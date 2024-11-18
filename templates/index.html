@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DriveSafe AI - Vehicle Health Prediction</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        /* Background and Overall Layout */
+        body {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                url(static/hi.jpg) no-repeat center center fixed; /* Replace 'your-image-path.jpg' with the actual image path */
+            background-size: cover;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            flex-direction: column;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 25px;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            margin-top: 50px;
+            
+        }
+
+        /* Dashboard Container Styling */
+        .dashboard-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            height: 400px;
+            max-width: 1000px;
+            margin: auto;
+            padding: 20px;
+            background:none;
+            border-radius: 20px;
+           
+        }
+
+        /* Car Dashboard Styling */
+        .car-dashboard {
+            background: rgb(0, 0, 0);
+            color: #fff;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.5);
+            width: 60%;
+            min-width: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            margin-right: 150px;
+        }
+
+        .car-dashboard h2 {
+            font-size: 1.5em;
+            text-align: center;
+            margin-bottom: 20px;
+            color: #afafaf;
+        }
+
+        .car-dashboard label {
+    font-size: 0.9em; 
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;/* Reduce font size for a sleeker look */
+    margin: 10px 0 5px;
+    color: #afafaf; /* Professional light gray color */
+    display: block; /* Ensures labels stay above the input fields */
+    text-align: left; /* Aligns labels to the left */
+    font-weight: 600; /* Slightly bold for readability */
+    letter-spacing: 0.5px; /* Subtle letter spacing for elegance */
+}
+
+
+        .car-dashboard input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 1px;
+            margin-bottom: 5px;
+            border-radius: 8px;
+            border: 1px solid #dddddd;
+            background: #333;
+            color: #fff;
+            font-size: 1em;
+            transition: 0.3s ease;
+        }
+
+        .car-dashboard input:focus {
+            border-color: #e74c3c;
+        }
+
+        .car-dashboard button {
+            width: 100%;
+            padding: 12px;
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #000000;
+            background-color: #fff;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: 0.3s ease;
+        }
+
+        .car-dashboard button:hover {
+            background-color: #3e5d9b;
+            color: white;
+        }
+
+        /* Mobile Layout for Notifications */
+        .mobile-container {
+            width: 40%;
+            min-width: 200px;
+            height: 500px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-left: 10px;
+            background: #222;
+            margin-right: 100px;
+            border-radius: 30px;
+            box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.7);
+        }
+
+        .mobile-screen {
+    width: 100%;
+    height: 100%;
+    background: url(static/111.jpg) no-repeat center center; /* Replace 'static/your-image-path.jpg' with your actual image path */
+    background-size: cover; /* Ensures the image covers the entire container */
+    border-radius: 30px;
+    padding: 20px;
+    box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.6);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    position: relative;
+    overflow: hidden;
+}
+
+        .app-name {
+            color: #fff;
+            font-size: 1.6em;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .notifications {
+            color: #fff;
+            text-align: center;
+            font-size: 1.1em;
+            margin-top: 50px;
+            padding: 10px;
+            width:250px;
+            height:35px;
+        }
+
+        .notifications p {
+            margin: 5px 0;
+            margin-left: -17px;
+            padding: 12px;
+            border-radius: 8px;
+            background-color: #ffffff;
+            color: #000000;
+            font-size: 14px;
+            font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            opacity: 0;
+            animation: fadeIn 1s ease forwards;
+            text-align: center;
+        }
+
+        /* Fade-in Animation for Notifications */
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        /* Mobile Look for better positioning */
+        @media (max-width: 768px) {
+            .dashboard-container {
+                flex-direction: column;
+                padding: 10px;
+                gap: 20px;
+            }
+
+            .car-dashboard {
+                width: 100%;
+                margin-bottom: 20px;
+            }
+
+            .mobile-container {
+                width: 100%;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <h1>DriveSafe AI - PREDICTIVE MAINTENANCE SYSTEM</h1>
+    
+    <div class="dashboard-container">
+        <!-- Car dashboard layout -->
+        <div class="car-dashboard">
+            <h2>Vehicle Health Dashboard</h2>
+            <form id="predictionForm">
+                <label for="engine_temperature">Engine Temperature:</label>
+                <input type="number" id="engine_temperature" name="engine_temperature" placeholder="°C" required>
+
+                <label for="battery_voltage">Battery Voltage:</label>
+                <input type="number" id="battery_voltage" name="battery_voltage" placeholder="V" required>
+
+                <label for="vibration_level">Vibration Level:</label>
+                <input type="number" id="vibration_level" name="vibration_level" placeholder="Level" required>
+
+                <label for="fuel_efficiency">Fuel Efficiency:</label>
+                <input type="number" id="fuel_efficiency" name="fuel_efficiency" placeholder="km/L" required>
+
+                <label for="mileage">Mileage:</label>
+                <input type="number" id="mileage" name="mileage" placeholder="km" required>
+
+                <button type="button" onclick="getPrediction()">Predict</button>
+            </form>
+        </div>
+
+        <!-- Mobile notification layout -->
+        <div class="mobile-container">
+            <div class="mobile-screen">
+                <div class="app-name">DriveSafe AI</div>
+                <div id="notifications" class="notifications">
+                    <p>📲 Notifications will appear here</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        async function getPrediction() {
+            const data = {
+                engine_temperature: parseFloat(document.getElementById("engine_temperature").value),
+                battery_voltage: parseFloat(document.getElementById("battery_voltage").value),
+                vibration_level: parseFloat(document.getElementById("vibration_level").value),
+                fuel_efficiency: parseFloat(document.getElementById("fuel_efficiency").value),
+                mileage: parseFloat(document.getElementById("mileage").value),
+            };
+
+            const response = await fetch('/predict', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            });
+
+            if (response.ok) {
+                const result = await response.json();
+                const notificationsDiv = document.getElementById('notifications');
+                notificationsDiv.innerHTML = '';// Clear previous notifications
+
+                if (result.warnings.length > 0) {
+                    result.warnings.forEach((warning) => {
+                        const warningEl = document.createElement('p');
+                        warningEl.textContent = warning;
+                        notificationsDiv.appendChild(warningEl);
+                    });
+                } else {
+                    notificationsDiv.innerHTML = '<p>✅ All metrics are within safe limits!</p>';
+                }
+            } else {
+                alert('Error: Failed to fetch data');
+            }
+        }
+    </script>
+</body>
+</html>
